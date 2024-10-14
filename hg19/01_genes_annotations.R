@@ -11,10 +11,10 @@ system('mkdir processed')
 
 # ensemble to hgnc
 fwrite(unique(all_genes[hgnc_symbol != '', .(ens_ID, hgnc_symbol)]),
-              'gene_symbols.txt', sep ='\t')
+              './processed/gene_symbols.txt', sep ='\t')
 # protein coding only
 fwrite(all_genes[biotype == 'protein_coding', ][, .(ens_ID, chr, start, end)],
        './processed/protein_coding_genes.txt', sep = '\t')
 # exons in RefSeq transcripts
 fwrite(all_exons[transcript_ID %chin% all_trans[refseq_ID != '', transcript_ID], ],
-       'exons_in_refseq_transcripts.txt', sep = '\t')
+       './processed/exons_in_refseq_transcripts.txt', sep = '\t')
