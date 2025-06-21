@@ -38,4 +38,4 @@ fwrite(dt, './processed_new/genes_trans_biotype_select.txt', sep = '\t')
 
 exons <- merge(all_exons, dt[, .(ens_ID, transcript_ID)])
 fwrite(exons[, .(transcript_ID, exon_ID, exon_start, exon_end)],
-       'processed_new/exons_select.txt', sep = '\t')
+       'processed_new/exons_select.txt.gz', sep = '\t')
