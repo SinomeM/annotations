@@ -1,4 +1,5 @@
 library(data.table)
+setwd('./hg38/')
 
 all_genes <- fread('./raw/hg38_biomart_all_genes.txt')
 colnames(all_genes) <- c('ens_ID', 'start', 'end', 'chr', 'biotype', 'hgnc_symbol')
