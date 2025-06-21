@@ -1,10 +1,11 @@
 library(data.table)
+setwd('./hg19/')
 
-all_genes <- fread('./raw/hg19_biomart_all_genes.txt')
-colnames(all_genes) <- c('ens_ID', 'start', 'end', 'chr', 'hgnc_symbol', 'biotype')
-all_trans <- fread('./raw/hg19_biomart_all_transcripts.txt')
+all_genes <- fread('./raw/hg19_biomart_all_genes.txt.gz')
+colnames(all_genes) <- c('ens_ID', 'start', 'chr', 'end', 'biotype', 'hgnc_symbol')
+all_trans <- fread('./raw/hg19_biomart_all_transcripts.txt.gz')
 colnames(all_trans) <- c('ens_ID', 'transcript_ID', 'transcript_biotype', 'refseq_ID')
-all_exons <- fread('./raw/hg19_biomart_all_exons.txt')
+all_exons <- fread('./raw/hg19_biomart_all_exons.txt.gz')
 colnames(all_exons) <- c('transcript_ID', 'exon_start', 'exon_end', 'exon_ID')
 
 system('mkdir processed')
