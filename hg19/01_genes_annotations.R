@@ -23,3 +23,19 @@ dt <- merge(dt, all_genes[, .(ens_ID, chr)], by = 'ens_ID')
 fwrite(dt[transcript_ID %chin% all_trans[refseq_ID != '', transcript_ID], ][
             , .(exon_ID, ens_ID, chr, exon_start, exon_end)],
        './processed/exons_in_refseq_transcripts.txt', sep = '\t')
+
+
+# New version
+
+dir.create('./processed_new')
+fwrite(all_genes[, .(ens_ID, hgnc_symbol, chr, start, end)],
+       './processed_new/all_genes.txt', sep = '\t')
+
+dt <- all_trans[transcript_biotype %in%
+                  c('lncRNA', 'miRNS', 'snRNA', 'misc_RNA', 'snoRNA', 'protein_coding'),
+                  .(ens_ID, transcript_ID, transcript_biotype)]
+fwrite(dt, './processed_new/genes_trans_biotype_select.txt', sep = '\t')
+
+exons <- merge(all_exons, dt[, .(ens_ID, transcript_ID)])
+fwrite(exons[, .(transcript_ID, exon_ID, exon_start, exon_end)],
+       'processed_new/exons_select.txt', sep = '\t')
